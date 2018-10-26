@@ -31,5 +31,8 @@ func Run() {
 func main() {
 	initLogger("file", "./logs", "user_server", "debug")
 	Run()
+
+	//hook使用
+	//logger.Init()
 	return
 }
