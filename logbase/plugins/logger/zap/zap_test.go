@@ -1,6 +1,7 @@
 package zap
 
 import (
+	"github.com/jason-wj/logger/logbase"
 	"testing"
 )
 
