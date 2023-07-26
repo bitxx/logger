@@ -6,7 +6,7 @@
 import (
 	"os"
 	"github.com/sirupsen/logrus"
-	"go-admin/common/core/logger"
+	"go-admin/common/logbase/logger"
 )
 
 func ExampleWithOutput() {

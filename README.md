@@ -20,7 +20,7 @@ func main(){
 		WithCap(10),
 	)
 
-	log := NewLogger(core.DefaultLogger)
+	log := NewLogger(logbase.DefaultLogger)
 	log.Info("xxxxxx")
 }
 ```
