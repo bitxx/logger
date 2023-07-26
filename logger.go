@@ -1,11 +1,11 @@
 package logger
 
 import (
-	"github.com/jason-wj/logger/logbase"
-	"github.com/jason-wj/logger/logbase/plugins/logger/logrus"
-	"github.com/jason-wj/logger/logbase/plugins/logger/zap"
-	"github.com/jason-wj/logger/logbase/writer"
-	"github.com/jason-wj/logger/util"
+	"github.com/bitxx/logger/logbase"
+	"github.com/bitxx/logger/logbase/plugins/logger/logrus"
+	"github.com/bitxx/logger/logbase/plugins/logger/zap"
+	"github.com/bitxx/logger/logbase/writer"
+	"github.com/bitxx/logger/util"
 	"io"
 	"log"
 	"os"

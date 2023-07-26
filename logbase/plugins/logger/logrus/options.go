@@ -1,7 +1,7 @@
 package logrus
 
 import (
-	"github.com/jason-wj/logger/logbase"
+	"github.com/bitxx/logger/logbase"
 	"github.com/sirupsen/logrus"
 )
 

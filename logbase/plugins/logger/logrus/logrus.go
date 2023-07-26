@@ -3,7 +3,7 @@ package logrus
 import (
 	"context"
 	"fmt"
-	"github.com/jason-wj/logger/logbase"
+	"github.com/bitxx/logger/logbase"
 	"os"
 
 	"github.com/sirupsen/logrus"

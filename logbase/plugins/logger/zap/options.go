@@ -1,7 +1,7 @@
 package zap
 
 import (
-	"github.com/jason-wj/logger/logbase"
+	"github.com/bitxx/logger/logbase"
 	"io"
 
 	"go.uber.org/zap"

@@ -3,7 +3,7 @@ package zap
 import (
 	"context"
 	"fmt"
-	"github.com/jason-wj/logger/logbase"
+	"github.com/bitxx/logger/logbase"
 	"io"
 	"os"
 	"sync"

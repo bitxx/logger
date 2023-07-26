@@ -1,7 +1,7 @@
 package logger
 
 import (
-	"github.com/jason-wj/logger/logbase"
+	"github.com/bitxx/logger/logbase"
 	"testing"
 )
 
