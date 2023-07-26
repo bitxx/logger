@@ -3,7 +3,7 @@ package logrus
 import (
 	"context"
 	"fmt"
-	"github.com/jason-wj/logger/core"
+	"github.com/jason-wj/logger/logbase"
 	"os"
 
 	"github.com/sirupsen/logrus"
@@ -22,7 +22,7 @@ type logrusLogger struct {
 	opts   Options
 }
 
-func (l *logrusLogger) Init(opts ...core.Option) error {
+func (l *logrusLogger) Init(opts ...logbase.Option) error {
 	for _, o := range opts {
 		o(&l.opts.Options)
 	}
@@ -80,29 +80,29 @@ func (l *logrusLogger) String() string {
 	return "logrus"
 }
 
-func (l *logrusLogger) Fields(fields map[string]interface{}) core.Logger {
+func (l *logrusLogger) Fields(fields map[string]interface{}) logbase.Logger {
 	return &logrusLogger{l.Logger.WithFields(fields), l.opts}
 }
 
-func (l *logrusLogger) Log(level core.Level, args ...interface{}) {
+func (l *logrusLogger) Log(level logbase.Level, args ...interface{}) {
 	l.Logger.Log(loggerToLogrusLevel(level), args...)
 }
 
-func (l *logrusLogger) Logf(level core.Level, format string, args ...interface{}) {
+func (l *logrusLogger) Logf(level logbase.Level, format string, args ...interface{}) {
 	l.Logger.Logf(loggerToLogrusLevel(level), format, args...)
 }
 
-func (l *logrusLogger) Options() core.Options {
+func (l *logrusLogger) Options() logbase.Options {
 	// FIXME: How to return full opts?
 	return l.opts.Options
 }
 
 // New builds a new logger based on options
-func NewLogger(opts ...core.Option) core.Logger {
+func NewLogger(opts ...logbase.Option) logbase.Logger {
 	// Default options
 	options := Options{
-		Options: core.Options{
-			Level:   core.InfoLevel,
+		Options: logbase.Options{
+			Level:   logbase.InfoLevel,
 			Fields:  make(map[string]interface{}),
 			Out:     os.Stderr,
 			Context: context.Background(),
@@ -117,40 +117,40 @@ func NewLogger(opts ...core.Option) core.Logger {
 	return l
 }
 
-func loggerToLogrusLevel(level core.Level) logrus.Level {
+func loggerToLogrusLevel(level logbase.Level) logrus.Level {
 	switch level {
-	case core.TraceLevel:
+	case logbase.TraceLevel:
 		return logrus.TraceLevel
-	case core.DebugLevel:
+	case logbase.DebugLevel:
 		return logrus.DebugLevel
-	case core.InfoLevel:
+	case logbase.InfoLevel:
 		return logrus.InfoLevel
-	case core.WarnLevel:
+	case logbase.WarnLevel:
 		return logrus.WarnLevel
-	case core.ErrorLevel:
+	case logbase.ErrorLevel:
 		return logrus.ErrorLevel
-	case core.FatalLevel:
+	case logbase.FatalLevel:
 		return logrus.FatalLevel
 	default:
 		return logrus.InfoLevel
 	}
 }
 
-func logrusToLoggerLevel(level logrus.Level) core.Level {
+func logrusToLoggerLevel(level logrus.Level) logbase.Level {
 	switch level {
 	case logrus.TraceLevel:
-		return core.TraceLevel
+		return logbase.TraceLevel
 	case logrus.DebugLevel:
-		return core.DebugLevel
+		return logbase.DebugLevel
 	case logrus.InfoLevel:
-		return core.InfoLevel
+		return logbase.InfoLevel
 	case logrus.WarnLevel:
-		return core.WarnLevel
+		return logbase.WarnLevel
 	case logrus.ErrorLevel:
-		return core.ErrorLevel
+		return logbase.ErrorLevel
 	case logrus.FatalLevel:
-		return core.FatalLevel
+		return logbase.FatalLevel
 	default:
-		return core.InfoLevel
+		return logbase.InfoLevel
 	}
 }

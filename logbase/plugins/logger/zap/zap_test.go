@@ -1,7 +1,6 @@
 package zap
 
 import (
-	"github.com/jason-wj/logger/core"
 	"testing"
 )
 
@@ -24,8 +23,8 @@ func TestLogf(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	core.DefaultLogger = l
-	core.Logf(core.InfoLevel, "test logf: %s", "name")
+	logbase.DefaultLogger = l
+	logbase.Logf(logbase.InfoLevel, "test logf: %s", "name")
 }
 
 func TestSetLevel(t *testing.T) {
@@ -33,23 +32,23 @@ func TestSetLevel(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	core.DefaultLogger = l
+	logbase.DefaultLogger = l
 
-	core.Init(core.WithLevel(core.DebugLevel))
-	l.Logf(core.DebugLevel, "test show debug: %s", "debug msg")
+	logbase.Init(logbase.WithLevel(logbase.DebugLevel))
+	l.Logf(logbase.DebugLevel, "test show debug: %s", "debug msg")
 
-	core.Init(core.WithLevel(core.InfoLevel))
-	l.Logf(core.DebugLevel, "test non-show debug: %s", "debug msg")
+	logbase.Init(logbase.WithLevel(logbase.InfoLevel))
+	l.Logf(logbase.DebugLevel, "test non-show debug: %s", "debug msg")
 }
 
 func TestWithReportCaller(t *testing.T) {
 	var err error
-	core.DefaultLogger, err = NewLogger(WithCallerSkip(0))
+	logbase.DefaultLogger, err = NewLogger(WithCallerSkip(0))
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	core.Logf(core.InfoLevel, "testing: %s", "WithReportCaller")
+	logbase.Logf(logbase.InfoLevel, "testing: %s", "WithReportCaller")
 }
 
 func TestFields(t *testing.T) {
@@ -57,10 +56,10 @@ func TestFields(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	core.DefaultLogger = l.Fields(map[string]interface{}{
+	logbase.DefaultLogger = l.Fields(map[string]interface{}{
 		"x-request-id": "123456abc",
 	})
-	core.DefaultLogger.Log(core.InfoLevel, "hello")
+	logbase.DefaultLogger.Log(logbase.InfoLevel, "hello")
 }
 
 func TestFile(t *testing.T) {

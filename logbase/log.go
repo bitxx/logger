@@ -1,5 +1,5 @@
 // Package log provides debug logging
-package core
+package logbase
 
 import (
 	"encoding/json"

@@ -1,10 +1,10 @@
 package logger
 
 import (
-	"github.com/jason-wj/logger/core"
-	"github.com/jason-wj/logger/core/plugins/logger/logrus"
-	"github.com/jason-wj/logger/core/plugins/logger/zap"
-	"github.com/jason-wj/logger/core/writer"
+	"github.com/jason-wj/logger/logbase"
+	"github.com/jason-wj/logger/logbase/plugins/logger/logrus"
+	"github.com/jason-wj/logger/logbase/plugins/logger/zap"
+	"github.com/jason-wj/logger/logbase/writer"
 	"github.com/jason-wj/logger/util"
 	"io"
 	"log"
@@ -12,7 +12,7 @@ import (
 )
 
 // SetupLogger 日志 cap 单位为kb
-func SetupLogger(opts ...Option) core.Logger {
+func SetupLogger(opts ...Option) logbase.Logger {
 	op := setDefault()
 	for _, o := range opts {
 		o(&op)
@@ -37,26 +37,26 @@ func SetupLogger(opts ...Option) core.Logger {
 	default:
 		output = os.Stdout
 	}
-	var level core.Level
-	level, err = core.GetLevel(op.level)
+	var level logbase.Level
+	level, err = logbase.GetLevel(op.level)
 	if err != nil {
 		log.Fatalf("get logger level error, %s", err.Error())
 	}
 
 	switch op.driver {
 	case "zap":
-		core.DefaultLogger, err = zap.NewLogger(core.WithLevel(level), zap.WithOutput(output), zap.WithCallerSkip(0))
+		logbase.DefaultLogger, err = zap.NewLogger(logbase.WithLevel(level), zap.WithOutput(output), zap.WithCallerSkip(0))
 		if err != nil {
 			log.Fatalf("new zap logger error, %s", err.Error())
 		}
 	case "logrus":
-		core.DefaultLogger = logrus.NewLogger(core.WithLevel(level), core.WithOutput(output), logrus.ReportCaller())
+		logbase.DefaultLogger = logrus.NewLogger(logbase.WithLevel(level), logbase.WithOutput(output), logrus.ReportCaller())
 	default:
-		core.DefaultLogger = core.NewLogger(core.WithLevel(level), core.WithOutput(output))
+		logbase.DefaultLogger = logbase.NewLogger(logbase.WithLevel(level), logbase.WithOutput(output))
 	}
-	return core.DefaultLogger
+	return logbase.DefaultLogger
 }
 
-func NewLogger(log core.Logger) *core.Helper {
-	return core.NewHelper(log)
+func NewLogger(log logbase.Logger) *logbase.Helper {
+	return logbase.NewHelper(log)
 }

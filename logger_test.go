@@ -1,7 +1,7 @@
 package logger
 
 import (
-	"github.com/jason-wj/logger/core"
+	"github.com/jason-wj/logger/logbase"
 	"testing"
 )
 
@@ -15,6 +15,6 @@ func TestLogger(t *testing.T) {
 		WithCap(10),
 	)
 
-	log := NewLogger(core.DefaultLogger)
+	log := NewLogger(logbase.DefaultLogger)
 	log.Info("xxxxxx")
 }

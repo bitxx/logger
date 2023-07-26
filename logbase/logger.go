@@ -1,4 +1,4 @@
-package core
+package logbase
 
 var (
 	// DefaultLogger logger
