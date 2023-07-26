@@ -1,7 +1,7 @@
 package zap
 
 import (
-	"logger/core"
+	"github.com/jason-wj/logger/core"
 	"testing"
 )
 

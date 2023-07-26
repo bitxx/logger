@@ -1,4 +1,4 @@
-module logger
+module github.com/jason-wj/logger
 
 go 1.20
 

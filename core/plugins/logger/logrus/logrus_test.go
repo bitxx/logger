@@ -2,12 +2,11 @@ package logrus
 
 import (
 	"errors"
+	"github.com/jason-wj/logger/core"
 	"os"
 	"testing"
 
 	"github.com/sirupsen/logrus"
-
-	"go-admin/common/core/logger"
 )
 
 func TestName(t *testing.T) {
@@ -21,22 +20,22 @@ func TestName(t *testing.T) {
 }
 
 func TestWithFields(t *testing.T) {
-	l := NewLogger(logger.WithOutput(os.Stdout)).Fields(map[string]interface{}{
+	l := NewLogger(core.WithOutput(os.Stdout)).Fields(map[string]interface{}{
 		"k1": "v1",
 		"k2": 123456,
 	})
 
-	logger.DefaultLogger = l
+	core.DefaultLogger = l
 
-	logger.Log(logger.InfoLevel, "testing: Info")
-	logger.Logf(logger.InfoLevel, "testing: %s", "Infof")
+	core.Log(core.InfoLevel, "testing: Info")
+	core.Logf(core.InfoLevel, "testing: %s", "Infof")
 }
 
 func TestWithError(t *testing.T) {
 	l := NewLogger().Fields(map[string]interface{}{"error": errors.New("boom!")})
-	logger.DefaultLogger = l
+	core.DefaultLogger = l
 
-	logger.Log(logger.InfoLevel, "testing: error")
+	core.Log(core.InfoLevel, "testing: error")
 }
 
 func TestWithLogger(t *testing.T) {
@@ -45,36 +44,36 @@ func TestWithLogger(t *testing.T) {
 		"k1": "v1",
 		"k2": 123456,
 	})
-	logger.DefaultLogger = l
-	logger.Log(logger.InfoLevel, "testing: with *logrus.Logger")
+	core.DefaultLogger = l
+	core.Log(core.InfoLevel, "testing: with *logrus.Logger")
 
 	// with *logrus.Entry
 	el := NewLogger(WithLogger(logrus.NewEntry(logrus.StandardLogger()))).Fields(map[string]interface{}{
 		"k3": 3.456,
 		"k4": true,
 	})
-	logger.DefaultLogger = el
-	logger.Log(logger.InfoLevel, "testing: with *logrus.Entry")
+	core.DefaultLogger = el
+	core.Log(core.InfoLevel, "testing: with *logrus.Entry")
 }
 
 func TestJSON(t *testing.T) {
-	logger.DefaultLogger = NewLogger(WithJSONFormatter(&logrus.JSONFormatter{}))
+	core.DefaultLogger = NewLogger(WithJSONFormatter(&logrus.JSONFormatter{}))
 
-	logger.Logf(logger.InfoLevel, "test logf: %s", "name")
+	core.Logf(core.InfoLevel, "test logf: %s", "name")
 }
 
 func TestSetLevel(t *testing.T) {
-	logger.DefaultLogger = NewLogger()
+	core.DefaultLogger = NewLogger()
 
-	logger.Init(logger.WithLevel(logger.DebugLevel))
-	logger.Logf(logger.DebugLevel, "test show debug: %s", "debug msg")
+	core.Init(core.WithLevel(core.DebugLevel))
+	core.Logf(core.DebugLevel, "test show debug: %s", "debug msg")
 
-	logger.Init(logger.WithLevel(logger.InfoLevel))
-	logger.Logf(logger.DebugLevel, "test non-show debug: %s", "debug msg")
+	core.Init(core.WithLevel(core.InfoLevel))
+	core.Logf(core.DebugLevel, "test non-show debug: %s", "debug msg")
 }
 
 func TestWithReportCaller(t *testing.T) {
-	logger.DefaultLogger = NewLogger(ReportCaller())
+	core.DefaultLogger = NewLogger(ReportCaller())
 
-	logger.Logf(logger.InfoLevel, "testing: %s", "WithReportCaller")
+	core.Logf(core.InfoLevel, "testing: %s", "WithReportCaller")
 }

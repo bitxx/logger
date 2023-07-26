@@ -1,13 +1,13 @@
 package logger
 
 import (
+	"github.com/jason-wj/logger/core"
+	"github.com/jason-wj/logger/core/plugins/logger/logrus"
+	"github.com/jason-wj/logger/core/plugins/logger/zap"
+	"github.com/jason-wj/logger/core/writer"
+	"github.com/jason-wj/logger/util"
 	"io"
 	"log"
-	"logger/core"
-	"logger/core/plugins/logger/logrus"
-	"logger/core/plugins/logger/zap"
-	"logger/core/writer"
-	"logger/util"
 	"os"
 )
 

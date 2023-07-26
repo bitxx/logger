@@ -1,8 +1,8 @@
 package zap
 
 import (
+	"github.com/jason-wj/logger/core"
 	"io"
-	"logger/core"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

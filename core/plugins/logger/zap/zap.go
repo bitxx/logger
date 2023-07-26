@@ -3,8 +3,8 @@ package zap
 import (
 	"context"
 	"fmt"
+	"github.com/jason-wj/logger/core"
 	"io"
-	"logger/core"
 	"os"
 	"sync"
 

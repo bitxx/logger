@@ -1,8 +1,8 @@
 package logrus
 
 import (
+	"github.com/jason-wj/logger/core"
 	"github.com/sirupsen/logrus"
-	"logger/core"
 )
 
 type Options struct {
