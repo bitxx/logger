@@ -11,8 +11,12 @@ import (
 	"os"
 )
 
-// SetupLogger 日志 cap 单位为kb
-func SetupLogger(opts ...Option) logbase.Logger {
+// NewLogger
+//
+//	@Description: new logger
+//	@param opts
+//	@return *logbase.Helper
+func NewLogger(opts ...Option) *logbase.Helper {
 	op := setDefault()
 	for _, o := range opts {
 		o(&op)
@@ -54,9 +58,5 @@ func SetupLogger(opts ...Option) logbase.Logger {
 	default:
 		logbase.DefaultLogger = logbase.NewLogger(logbase.WithLevel(level), logbase.WithOutput(output))
 	}
-	return logbase.DefaultLogger
-}
-
-func NewLogger(log logbase.Logger) *logbase.Helper {
-	return logbase.NewHelper(log)
+	return logbase.NewHelper(logbase.DefaultLogger)
 }

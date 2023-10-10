@@ -1,20 +1,19 @@
 package logger
 
 import (
-	"github.com/bitxx/logger/logbase"
 	"testing"
 )
 
 func TestLogger(t *testing.T) {
 	//type: logrus zap default
-	SetupLogger(
+	log := NewLogger(
 		WithType("logrus"),
 		WithPath("temp/logs"),
 		WithLevel("info"),
-		WithStdout("file"),
+		WithStdout("default"),
 		WithCap(10),
 	)
 
-	log := NewLogger(logbase.DefaultLogger)
 	log.Info("xxxxxx")
+	log.Warn("######")
 }

@@ -12,15 +12,14 @@ cap：文件写入日志条数
 ## 使用方式
 ```go
 func main(){
-	SetupLogger(
-		WithType("zap"),
+	log := NewLogger(
+		WithType("logrus"),
 		WithPath("temp/logs"),
 		WithLevel("info"),
-		WithStdout("file"),
+		WithStdout("default"),
 		WithCap(10),
 	)
 
-	log := NewLogger(logbase.DefaultLogger)
 	log.Info("xxxxxx")
 }
 ```

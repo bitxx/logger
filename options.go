@@ -21,8 +21,9 @@ func setDefault() options {
 	return options{
 		driver: "default",
 		path:   "tmp/logs",
-		level:  "warn",
+		level:  "info",
 		stdout: "default",
+		cap:    10,
 	}
 }
 
