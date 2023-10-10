@@ -21,7 +21,7 @@ func NewLogger(opts ...Option) *logbase.Helper {
 	for _, o := range opts {
 		o(&op)
 	}
-	if !util.PathExist(op.path) {
+	if op.path != "" && !util.PathExist(op.path) {
 		err := util.PathCreate(op.path)
 		if err != nil {
 			log.Fatalf("create dir error: %s", err.Error())

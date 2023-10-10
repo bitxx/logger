@@ -20,7 +20,7 @@ type options struct {
 func setDefault() options {
 	return options{
 		driver: "default",
-		path:   "tmp/logs",
+		path:   "",
 		level:  "info",
 		stdout: "default",
 		cap:    10,
