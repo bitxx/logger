@@ -88,29 +88,34 @@ func (l *zaplog) Init(opts ...logbase.Option) error {
 }
 
 func (l *zaplog) Fields(fields map[string]interface{}) logbase.Logger {
-	l.Lock()
-	nfields := make(map[string]interface{}, len(l.fields))
-	for k, v := range l.fields {
-		nfields[k] = v
-	}
-	l.Unlock()
-	for k, v := range fields {
-		nfields[k] = v
+	if len(fields) == 0 {
+		return l
 	}
 
-	data := make([]zap.Field, 0, len(nfields))
+	// 直接构建zap字段
+	data := make([]zap.Field, 0, len(fields))
 	for k, v := range fields {
 		data = append(data, zap.Any(k, v))
 	}
 
-	zl := &zaplog{
+	// 合并字段到新map
+	nfields := make(map[string]interface{}, len(l.fields)+len(fields))
+	l.RLock()
+	for k, v := range l.fields {
+		nfields[k] = v
+	}
+	l.RUnlock()
+
+	for k, v := range fields {
+		nfields[k] = v
+	}
+
+	return &zaplog{
 		cfg:    l.cfg,
-		zap:    l.zap,
+		zap:    l.zap.With(data...),
 		opts:   l.opts,
 		fields: nfields,
 	}
-
-	return zl
 }
 
 func (l *zaplog) Error(err error) logbase.Logger {
