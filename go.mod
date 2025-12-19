@@ -1,6 +1,6 @@
 module github.com/bitxx/logger
 
-go 1.21.3
+go 1.25.4
 
 require (
 	github.com/sirupsen/logrus v1.9.3
