@@ -1,6 +1,6 @@
 module github.com/bitxx/logger
 
-go 1.25.4
+go 1.26.1
 
 require go.uber.org/zap v1.27.1
 
