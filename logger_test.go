@@ -5,9 +5,9 @@ import (
 )
 
 func TestLogger(t *testing.T) {
-	//type: logrus zap default
+	//type: zap default
 	log := NewLogger(
-		WithType("logrus"),
+		WithType("zap"),
 		WithPath("temp/logs"),
 		WithLevel("info"),
 		WithStdout("default"),

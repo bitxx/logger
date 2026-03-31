@@ -2,7 +2,6 @@ package logger
 
 import (
 	"github.com/bitxx/logger/logbase"
-	"github.com/bitxx/logger/logbase/plugins/logger/logrus"
 	"github.com/bitxx/logger/logbase/plugins/logger/zap"
 	"github.com/bitxx/logger/logbase/writer"
 	"github.com/bitxx/logger/util"
@@ -53,8 +52,6 @@ func NewLogger(opts ...Option) *logbase.Helper {
 		if err != nil {
 			log.Fatalf("new zap logger error, %s", err.Error())
 		}
-	case "logrus":
-		logbase.DefaultLogger = logrus.NewLogger(logbase.WithLevel(level), logbase.WithOutput(output), logrus.ReportCaller())
 	default:
 		logbase.DefaultLogger = logbase.NewLogger(logbase.WithLevel(level), logbase.WithOutput(output))
 	}
